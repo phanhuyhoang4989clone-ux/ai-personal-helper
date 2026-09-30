@@ -4,7 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_classic.agents import create_tool_calling_agent, AgentExecutor
 
 # Lấy các công cụ và nội quy bạn đã làm ở 2 file kia
-from tools import danh_sach_cong_cu
+from tools import danh_sach_cong_cu, DANH_SACH_APP, mo_phan_mem
 from prompts import lay_noi_quy
 
 # 1. Nạp chìa khóa từ két sắt .env
@@ -23,15 +23,21 @@ print("\n=== TRỢ LÝ AI ĐÃ SẴN SÀNG! (Gõ 'thoat' để dừng) ===\n")
 
 while True:
     cau_hoi = input("Bạn muốn AI làm gì: ")
-    if cau_hoi.lower() == "thoat":
-        print("Tạm biệt!")
+    if cau_hoi.strip().lower() == "thoat":
         break
-    
-    try:
-        ket_qua = dieu_hanh.invoke({
-            "user_input": cau_hoi,
-            "chat_history": []
-        })
-        print("\nAI trả lời:", ket_qua["output"], "\n")
-    except Exception as e:
-        print("\nCó lỗi xảy ra:", e, "\n")
+
+    # Kiểm tra nhanh: câu có chứa tên app nào không -> mở thẳng, khỏi tốn lượt gọi AI
+    cau_hoi_thuong = cau_hoi.lower()
+    ten_tim_thay = None
+    for ten_app in DANH_SACH_APP:
+        if ten_app in cau_hoi_thuong:
+            ten_tim_thay = ten_app
+            break
+
+    if ten_tim_thay:
+        ket_qua = mo_phan_mem.func(ten_tim_thay)
+        print(ket_qua)
+    else:
+        # Câu phức tạp, không khớp tên app nào -> mới nhờ AI xử lý
+        ket_qua = dieu_hanh.invoke({"input": cau_hoi})
+        print(ket_qua["output"])
