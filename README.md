@@ -117,13 +117,17 @@ Lấy key miễn phí tại: [https://console.groq.com](https://console.groq.com
 
 ### Bước 4 – Chạy ứng dụng
 
-**Cách 1 – Cửa sổ app (khuyến nghị):**
+**Cách 1 – Bằng file .bat (khuyến nghị):**
+
+Ấn mở trực tiếp file Maph.bat 
+```
+**Cách 2 – Cửa sổ app:**
 
 ```bash
-python app.py
+python app.py 
 ```
 
-**Cách 2 – Mở bằng trình duyệt:**
+**Cách 3 – Mở bằng trình duyệt:**
 
 ```bash
 python UI.py
