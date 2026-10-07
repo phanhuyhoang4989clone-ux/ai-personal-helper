@@ -1,47 +1,165 @@
-# [TÊN PROJECT] - Trợ lý AI chạy trên máy tính
+```markdown
+# AI Personal Helper – Trợ lý AI chạy trên máy tính
 
-Trợ lý AI chạy trên máy cá nhân, hiểu ngôn ngữ tự nhiên và thực hiện tác vụ thay người dùng (mở ứng dụng, quản lý file, chụp màn hình, mở website...), tương tự Copilot của Microsoft. Hệ thống dùng **Cloud API (Groq)** kết hợp **Tool Calling** để điều khiển máy.
+Trợ lý ảo trên máy cá nhân, hiểu ngôn ngữ tự nhiên và thực hiện tác vụ thay người dùng (mở ứng dụng, quản lý file, chụp màn hình, mở website, chỉnh âm lượng…).
 
-**Môn học:** Introduction to Information Technology | **Giảng viên:** Nguyễn Đăng Quang | **Nhóm:** 3
+Hệ thống dùng kiến trúc **Hybrid**: **Cloud LLM (Groq API)** kết hợp **Tool Calling** để điều khiển máy local.
 
-## Tính năng dự kiến
+| Thông tin | Chi tiết |
+|-----------|----------|
+| **Môn học** | Introduction to Information Technology |
+| **Giảng viên** | Nguyễn Đăng Quang |
+| **Nhóm** | 3 |
 
-- Chat với AI bằng ngôn ngữ tự nhiên
-- Mở ứng dụng, thao tác file, chụp màn hình, mở website
+---
 
-*(Cập nhật lại khi các tính năng hoàn thành.)*
+## 1. Tính năng
 
-## Công nghệ
+- Chat với AI bằng tiếng Việt (ngôn ngữ tự nhiên)
+- Mở ứng dụng trên máy (Chrome, Notepad, Discord…)
+- Mở website (Google, YouTube…)
+- Chụp màn hình và lưu vào thư mục `screenshot/`
+- Đọc / ghi / thêm ghi chú file (thư mục `notes/`)
+- Chỉnh âm lượng hệ thống (0–100)
+- Xem ngày giờ hiện tại
+- Giao diện chat (Gradio), có thể chạy dạng cửa sổ app (pywebview)
 
-- Python
-- Cloud API: Groq 
-- Giao diện: Gradio
+### Ví dụ lệnh
 
-## Cài đặt và chạy
+| Bạn gõ | Hệ thống làm |
+|--------|----------------|
+| `Mở Chrome giúp mình` | Mở Google Chrome |
+| `Mở youtube.com` | Mở website YouTube |
+| `Chụp màn hình` | Chụp màn hình, lưu file ảnh |
+| `Chỉnh âm lượng 40` | Đặt volume = 40% |
+| `Viết note: Họp nhóm lúc 8h` | Ghi chú vào `notes/` |
+| `Bây giờ là mấy giờ?` | Trả về giờ hiện tại |
 
-*(Sẽ bổ sung chi tiết khi project hoàn thiện.)*
+---
+
+## 2. Công nghệ
+
+| Thành phần | Công nghệ |
+|------------|-----------|
+| Ngôn ngữ | Python |
+| Cloud LLM | Groq API (Tool Calling) |
+| Giao diện | Gradio |
+| Cửa sổ desktop | pywebview (tùy chọn) |
+| Xử lý ảnh | Pillow |
+| Âm lượng Windows | pycaw + comtypes |
+
+### Luồng hoạt động (Tool Calling)
+
+```text
+Người dùng nhập lệnh
+        ↓
+LLM (Groq) chọn tool phù hợp
+        ↓
+Python chạy hàm local trên máy
+        ↓
+Trả kết quả → LLM trả lời tự nhiên (hoặc hiện ảnh nếu screenshot)
+```
+
+---
+
+## 3. Cấu trúc thư mục
+
+```text
+aph/
+├── main.py              # Backend: tools + chat_with_tools
+├── app.py               # UI Gradio + cửa sổ desktop (pywebview)
+├── UI.py                # UI chạy trên trình duyệt (tùy chọn)
+├── requirements.txt     # Danh sách thư viện
+├── .env                 # GROQ_API_KEY (không commit)
+├── notes/               # File ghi chú
+├── screenshot/          # Ảnh chụp màn hình
+└── README.md
+```
+
+---
+
+## 4. Cài đặt và chạy
+
+### Bước 1 – Clone dự án
 
 ```bash
 git clone [URL_REPO]
-cd [TEN_THU_MUC]
-pip install -r requirements.txt
-# Tạo file .env từ .env.example và điền API key của Grok (xAI)
+cd aph
 ```
 
-Chạy ứng dụng (giao diện Gradio):
+### Bước 2 – Cài thư viện
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Nội dung `requirements.txt`:
+
+```text
+groq
+python-dotenv
+gradio
+pillow
+pycaw
+comtypes
+pywebview
+AppOpener
+```
+
+### Bước 3 – Cấu hình API key
+
+Tạo file `.env` trong thư mục dự án:
+
+```env
+GROQ_API_KEY=nhập_key_groq_của_bạn
+```
+
+Lấy key miễn phí tại: [https://console.groq.com](https://console.groq.com)
+
+> **Không commit** file `.env` lên GitHub (chứa API key).
+
+### Bước 4 – Chạy ứng dụng
+
+**Cách 1 – Cửa sổ app (khuyến nghị):**
 
 ```bash
 python app.py
 ```
 
-> Không commit file `.env` (chứa API key) lên GitHub.
+**Cách 2 – Mở bằng trình duyệt:**
 
-## Thành viên
+```bash
+python UI.py
+```
 
-| Họ tên | MSSV | Vai trò |
-|---|---|---|
-| Phan Huy Hoàng | 26110098 | Leader + Backend |
-| Nguyễn Hoàng Nhân | 26110157 | AI / Prompt Engineering |
-| Nguyễn Quang Huy | 26110106 | System Control (Local) |
-| Nguyễn Trung Nguyên | 26110152 | Frontend / UI |
-| Nguyễn Phước Hưng | 26110109 | Testing + Documentation + Present |
+Sau đó vào: http://127.0.0.1:7860
+
+---
+
+## 5. Thành viên & phân công
+
+| Họ tên | MSSV | Vai trò | Nhiệm vụ chính |
+|--------|------|---------|----------------|
+| Phan Huy Hoàng | 26110098 | Leader + Backend | Quản lý tiến độ; tích hợp Groq API + Tool Calling; quản lý GitHub |
+| Nguyễn Hoàng Nhân | 26110157 | AI / Prompt Engineering | System prompt; thiết kế tool schema; tối ưu Tool Calling & edge case |
+| Nguyễn Quang Huy | 26110106 | System Control (Local) | Hàm điều khiển máy: mở app/web, screenshot, file, volume |
+| Nguyễn Trung Nguyên | 26110152 | Frontend / UI | Giao diện Gradio; kết nối backend; hiển thị chat & ảnh |
+| Nguyễn Phước Hưng | 26110109 | Testing + Docs + Present | Kiểm thử; README & báo cáo; slide; video demo; thuyết trình |
+
+---
+
+## 6. Lưu ý
+
+- Cần **kết nối internet** để gọi Groq API
+- Một số tính năng tối ưu cho **Windows** (âm lượng, mở app)
+- Nên dùng **Python 3.10 – 3.12** nếu gặp lỗi tương thích với bản quá mới
+- Thư mục `notes/` và `screenshot/` được tạo tự động khi chạy
+
+---
+
+## 7. License
+
+Đồ án môn học – chỉ sử dụng cho mục đích học tập.
+```
+
+Copy toàn bộ vào `README.md`, nhớ thay `[URL_REPO]` bằng link GitHub thật của nhóm.
