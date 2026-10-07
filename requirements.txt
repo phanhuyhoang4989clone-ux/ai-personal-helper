@@ -1,0 +1,8 @@
+groq
+python-dotenv
+gradio
+pillow
+pycaw
+comtypes
+pywebview
+AppOpener
