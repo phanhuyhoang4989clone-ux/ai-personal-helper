@@ -1,4 +1,3 @@
-```markdown
 # AI Personal Helper – Trợ lý AI chạy trên máy tính
 
 Trợ lý ảo trên máy cá nhân, hiểu ngôn ngữ tự nhiên và thực hiện tác vụ thay người dùng (mở ứng dụng, quản lý file, chụp màn hình, mở website, chỉnh âm lượng…).
@@ -160,6 +159,3 @@ Sau đó vào: http://127.0.0.1:7860
 ## 7. License
 
 Đồ án môn học – chỉ sử dụng cho mục đích học tập.
-```
-
-Copy toàn bộ vào `README.md`, nhớ thay `[URL_REPO]` bằng link GitHub thật của nhóm.
