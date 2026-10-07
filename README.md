@@ -126,7 +126,7 @@ Lấy key miễn phí tại: [https://console.groq.com](https://console.groq.com
 
 **Cách 1 – Bằng file .bat (khuyến nghị):**
 
-Ấn mở trực tiếp file Maph.bat 
+Ấn mở trực tiếp file Maph.bat ( có thể sử dụng cửa sổ đã mở hoặc web http://http://127.0.0.1:7860/ )
 
 **Cách 2 – Cửa sổ app:**
 
