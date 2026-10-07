@@ -81,7 +81,7 @@ aph/
 ### Bước 1 – Clone dự án
 
 ```bash
-git clone [URL_REPO]
+git clone https://github.com/phanhuyhoang4989clone-ux/ai-personal-helper.git
 cd aph
 ```
 
