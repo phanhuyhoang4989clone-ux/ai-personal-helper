@@ -69,11 +69,9 @@ aph/
 
 ├── app.py               # UI Gradio + cửa sổ desktop (pywebview)
 
-├── UI.py                # UI chạy trên trình duyệt (tùy chọn)
-
 ├── requirements.txt     # Danh sách thư viện
 
-├── .env                 # GROQ_API_KEY (không commit)
+├── .env                 # GROQ_API_KEY 
 
 ├── notes/               # File ghi chú
 
@@ -135,16 +133,6 @@ Lấy key miễn phí tại: [https://console.groq.com](https://console.groq.com
 ```bash
 python app.py 
 ```
-
-**Cách 3 – Mở bằng trình duyệt:**
-
-```bash
-python UI.py
-```
-
-Sau đó vào: http://127.0.0.1:7860
-
----
 
 ## 5. Thành viên & phân công
 
