@@ -64,14 +64,23 @@ Trả kết quả → LLM trả lời tự nhiên (hoặc hiện ảnh nếu scr
 
 
 aph/
+
 ├── main.py              # Backend: tools + chat_with_tools
+
 ├── app.py               # UI Gradio + cửa sổ desktop (pywebview)
+
 ├── UI.py                # UI chạy trên trình duyệt (tùy chọn)
+
 ├── requirements.txt     # Danh sách thư viện
+
 ├── .env                 # GROQ_API_KEY (không commit)
+
 ├── notes/               # File ghi chú
+
 ├── screenshot/          # Ảnh chụp màn hình
+
 └── README.md
+
 
 
 ---
