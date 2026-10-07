@@ -49,7 +49,6 @@ Hệ thống dùng kiến trúc **Hybrid**: **Cloud LLM (Groq API)** kết hợp
 
 ### Luồng hoạt động (Tool Calling)
 
-```text
 Người dùng nhập lệnh
         ↓
 LLM (Groq) chọn tool phù hợp
@@ -57,13 +56,13 @@ LLM (Groq) chọn tool phù hợp
 Python chạy hàm local trên máy
         ↓
 Trả kết quả → LLM trả lời tự nhiên (hoặc hiện ảnh nếu screenshot)
-```
+
 
 ---
 
 ## 3. Cấu trúc thư mục
 
-```text
+
 aph/
 ├── main.py              # Backend: tools + chat_with_tools
 ├── app.py               # UI Gradio + cửa sổ desktop (pywebview)
@@ -73,7 +72,7 @@ aph/
 ├── notes/               # File ghi chú
 ├── screenshot/          # Ảnh chụp màn hình
 └── README.md
-```
+
 
 ---
 
@@ -115,7 +114,6 @@ GROQ_API_KEY=nhập_key_groq_của_bạn
 
 Lấy key miễn phí tại: [https://console.groq.com](https://console.groq.com)
 
-> **Không commit** file `.env` lên GitHub (chứa API key).
 
 ### Bước 4 – Chạy ứng dụng
 
